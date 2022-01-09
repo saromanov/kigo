@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"github.com/saromanov/kigo/internal/rest"
 )
 

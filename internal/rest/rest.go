@@ -14,6 +14,9 @@ import (
 func Init(ctx context.Context, cfg Config) error {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", handlers.Create())
-	http.ListenAndServe(cfg.Address, r)
+	r.Get("/", handlers.Create().ServeHTTP)
+	if err := http.ListenAndServe(cfg.Address, r); err != nil {
+		return err
+	}
+	return nil
 }

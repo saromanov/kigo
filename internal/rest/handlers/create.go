@@ -10,7 +10,6 @@ func Create() http.Handler {
 }
 
 func (c *createService) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	
+
 }
 
