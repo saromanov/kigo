@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"io/fs"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -30,7 +31,8 @@ func (s *service) Run(ctx context.Context) error {
 	if err := os.MkdirAll(mainPath, fs.ModeDir); err != nil {
 		return err
 	}
-	if _, err := os.Create(filepath.Join(mainPath, "main.go")); err != nil {
+
+	if err := ioutil.WriteFile(filepath.Join(mainPath, "main.go"), []byte("package main\n\nfunc main() {\n\n}\n"), 0644); err != nil {
 		return err
 	}
 	return nil
