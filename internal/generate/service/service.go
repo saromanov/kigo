@@ -9,6 +9,10 @@ import (
 	"path/filepath"
 )
 
+// Generate defines interface for generation service
+type Generate interface {
+	Run(ctx context.Context) error 
+}
 // service provides generation of the service
 type service struct {
 	cfg Config
