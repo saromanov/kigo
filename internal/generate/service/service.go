@@ -27,13 +27,26 @@ func (s *service) Run(ctx context.Context) error {
 	if s.cfg.Name == "" {
 		return errors.New("name of the service is not defined")
 	}
-	mainPath := filepath.Join(s.cfg.Name, "cmd")
-	if err := os.MkdirAll(mainPath, fs.ModeDir); err != nil {
+
+	cmdPath, err := createDir(s.cfg.Name, "cmd")
+	if err != nil {
+		return err
+	}
+	_, err = createDir(s.cfg.Name, "internal")
+	if err != nil {
 		return err
 	}
 
-	if err := ioutil.WriteFile(filepath.Join(mainPath, "main.go"), []byte("package main\n\nfunc main() {\n\n}\n"), 0644); err != nil {
+	if err := ioutil.WriteFile(filepath.Join(cmdPath, "main.go"), []byte("package main\n\nfunc main() {\n\n}\n"), 0644); err != nil {
 		return err
 	}
 	return nil
+}
+
+func createDir(dirname, name string) (string, error) {
+	mainPath := filepath.Join(dirname, name)
+	if err := os.MkdirAll(mainPath, fs.ModeDir); err != nil {
+		return "", err
+	}
+	return mainPath, nil
 }
