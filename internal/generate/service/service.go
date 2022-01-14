@@ -26,7 +26,8 @@ func New(cfg Config) *service {
 }
 
 
-// Run starts generation of the service
+// Run starts generation of the service files
+// Also, it starts to generate suppotted files like Dockerfile
 func (s *service) Run(ctx context.Context) error {
 	if s.cfg.Name == "" {
 		return errors.New("name of the service is not defined")
