@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/render"
@@ -31,5 +30,5 @@ func (e dataResponse) Data() interface{}{
 func Response[T ResponseType](a T, w http.ResponseWriter, r *http.Request) error {
 	data := a.Data()
 	render.JSON(w, r, data)
-	return a.Run()
+	return nil
 }

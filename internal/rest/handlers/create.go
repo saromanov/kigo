@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 	"encoding/json"
-	"github.com/saromanov/kigo/internal/models"
+	models "github.com/saromanov/kigo/internal/models/rest"
 )
 
 type createService struct {
@@ -19,15 +19,17 @@ func (c *createService) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     err := decoder.Decode(&t)
     if err != nil {
 		e := errorResponse{
-			
+			data: models.ErrorResponse {
+				Message: "unable to decode response",
+			},
 		}
-		Response[errorResponse](w, r, e)
+		Response[errorResponse](e, w, r)
 		return
 	}
 	d := dataResponse{
 		data: t,
 	}
-	Response[dataResponse](w, r, d)
+	Response[dataResponse](d, w, r)
 	
 }
 
