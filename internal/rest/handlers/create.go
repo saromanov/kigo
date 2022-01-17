@@ -18,10 +18,16 @@ func (c *createService) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     var t models.ServiceCreate
     err := decoder.Decode(&t)
     if err != nil {
-		ErrorResponse(nil, w)
+		e := errorResponse{
+			
+		}
+		Response[errorResponse](w, r, e)
 		return
 	}
-	Response(nil, w)
+	d := dataResponse{
+		data: t,
+	}
+	Response[dataResponse](w, r, d)
 	
 }
 
