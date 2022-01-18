@@ -10,5 +10,7 @@ func main(){
 	ctx := context.Background()
 
 	srv := service.New(service.Config{})
-	rest.Init(ctx, rest.Config{}, srv)
+	rest.Init(ctx, rest.Config{
+		Address: "localhost:8082",
+	}, srv)
 }

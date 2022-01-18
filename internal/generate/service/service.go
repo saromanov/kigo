@@ -45,6 +45,10 @@ func (s *service) Run(ctx context.Context) error {
 	if err := ioutil.WriteFile(filepath.Join(cmdPath, "main.go"), []byte("package main\n\nfunc main() {\n\n}\n"), 0644); err != nil {
 		return err
 	}
+
+	if err := createDefaultDockerfile(cmdPath, s.cfg.BaseImage); err != nil {
+		return err
+	}
 	return nil
 }
 
