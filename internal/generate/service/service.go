@@ -52,6 +52,7 @@ func (s *service) Run(ctx context.Context) error {
 	return nil
 }
 
+// creating of the directory with data
 func createDir(dirname, name string) (string, error) {
 	mainPath := filepath.Join(dirname, name)
 	if err := os.MkdirAll(mainPath, fs.ModeDir); err != nil {
